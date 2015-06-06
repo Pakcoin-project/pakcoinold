@@ -35,7 +35,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0xc15185f7973adab34cca33e894d5b20eac72378435d216dfe35e1ff9693b2139");
+uint256 hashGenesisBlock("0x3091f440b6dfcf5d00be71b75bceded11f8606decaa339fe2c9f59e8efcfded2");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Pakcoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -1092,8 +1092,8 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
 	if (nHeight == 1)
 		nSubsidy = 18200000 * COIN;
 
-    // Subsidy is cut in half every 1000000 blocks, which will occur approximately every 3 years
-    nSubsidy >>= (nHeight / 1576800); // Pakcoin: 1000k blocks in ~3 years
+    // Subsidy is cut in half every ~1576k blocks, which will occur approximately every 3 years
+    nSubsidy >>= (nHeight / 1576800); // Pakcoin: ~1576k blocks in ~3 years
 
     return nSubsidy + nFees;
 }
@@ -2796,7 +2796,7 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1432771201;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 387197584;
+        block.nNonce   = 387576598;
 
         if (fTestNet)
         {
