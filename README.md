@@ -1,10 +1,10 @@
 Pakcoin integration/staging tree
 ================================
 
-http://www.pakcoin.org
+http://www.pakcoin.io
 
 Copyright (c) 2009-2014 Bitcoin Developers
-Copyright (c) 2015-2015 Pakcoin Developers
+Copyright (c) 2015-2018 Pakcoin Developers
 
 What is Pakcoin?
 ----------------
@@ -14,7 +14,7 @@ Pakcoin is a Digital Currency for Pakistan, using scrypt as a proof-of-work algo
  - subsidy halves in 3 years
  - 182 million total coins
  - 50 coins per block
- - 1440 blocks to retarget difficulty
+ - 1 block to retarget difficulty using DGW. 
 
 For more information, as well as an immediately useable, binary version of
 the Pakcoin client sofware, see https://www.pakcoin.io
