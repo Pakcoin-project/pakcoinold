@@ -9,7 +9,7 @@ Copyright (c) 2015-2015 Pakcoin Developers
 What is Pakcoin?
 ----------------
 
-Pakcoin is Digital Currency for Pakistan, using scrypt as a proof-of-work algorithm.
+Pakcoin is a Digital Currency for Pakistan, using scrypt as a proof-of-work algorithm.
  - 1 minute block targets
  - subsidy halves in 3 years
  - 182 million total coins
@@ -17,7 +17,7 @@ Pakcoin is Digital Currency for Pakistan, using scrypt as a proof-of-work algori
  - 1440 blocks to retarget difficulty
 
 For more information, as well as an immediately useable, binary version of
-the Pakcoin client sofware, see http://www.pakcoin.info
+the Pakcoin client sofware, see https://www.pakcoin.io
 
 License
 -------
