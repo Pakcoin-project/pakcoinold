@@ -1,33 +1,36 @@
-Name Pakcoin
+Name "Pakcoin Core (64-bit)"
 
 RequestExecutionLevel highest
 SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.7.5
-!define COMPANY "Pakcoin project"
-!define URL http://www.pakcoin.org/
+!define VERSION 0.15.1
+!define COMPANY "Pakcoin Core project"
+!define URL https://pakcoin.org/
 
 # MUI Symbol Definitions
-!define MUI_ICON "../share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "../share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "/home/onemanteam/litecoin/share/pixmaps/bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "/home/onemanteam/litecoin/share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "../share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "/home/onemanteam/litecoin/share/pixmaps/nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER Pakcoin
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "Pakcoin Core"
 !define MUI_FINISHPAGE_RUN $INSTDIR\pakcoin-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "../share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/home/onemanteam/litecoin/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
 !include Sections.nsh
 !include MUI2.nsh
+!if "64" == "64"
+!include x64.nsh
+!endif
 
 # Variables
 Var StartMenuGroup
@@ -45,14 +48,18 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile pakcoin-${VERSION}-win32-setup.exe
+OutFile /home/onemanteam/litecoin/pakcoin-${VERSION}-win64-setup.exe
+!if "64" == "64"
+InstallDir $PROGRAMFILES64\Pakcoin
+!else
 InstallDir $PROGRAMFILES\Pakcoin
+!endif
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion ${VERSION}
-VIAddVersionKey ProductName Pakcoin
+VIProductVersion ${VERSION}.0
+VIAddVersionKey ProductName "Pakcoin Core"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -66,19 +73,16 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File ../release/pakcoin-qt.exe
-    File /oname=COPYING.txt ../COPYING
-    File /oname=readme.txt ../doc/README_windows.txt
+    File /home/onemanteam/litecoin/release/pakcoin-qt.exe
+    File /oname=COPYING.txt /home/onemanteam/litecoin/COPYING
+    File /oname=readme.txt /home/onemanteam/litecoin/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File ../src/pakcoind.exe
-    SetOutPath $INSTDIR\src
-    File /r /x *.exe /x *.o ../src\*.*
+    File /home/onemanteam/litecoin/release/pakcoind.exe
+    File /home/onemanteam/litecoin/release/pakcoin-cli.exe
+    SetOutPath $INSTDIR\doc
+    File /r /home/onemanteam/litecoin/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
-
-    # Remove old wxwidgets-based-bitcoin executable and locales:
-    Delete /REBOOTOK $INSTDIR\pakcoin.exe
-    RMDir /r /REBOOTOK $INSTDIR\locale
 SectionEnd
 
 Section -post SEC0001
@@ -87,8 +91,9 @@ Section -post SEC0001
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Pakcoin.lnk" $INSTDIR\pakcoin-qt.exe
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall Pakcoin.lnk" $INSTDIR\uninstall.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\pakcoin-qt.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Pakcoin Core (testnet, 64-bit).lnk" "$INSTDIR\pakcoin-qt.exe" "-testnet" "$INSTDIR\pakcoin-qt.exe" 1
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_END
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayVersion "${VERSION}"
@@ -123,14 +128,15 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\COPYING.txt
     Delete /REBOOTOK $INSTDIR\readme.txt
     RMDir /r /REBOOTOK $INSTDIR\daemon
-    RMDir /r /REBOOTOK $INSTDIR\src
+    RMDir /r /REBOOTOK $INSTDIR\doc
     DeleteRegValue HKCU "${REGKEY}\Components" Main
 SectionEnd
 
 Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall Pakcoin.lnk"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Pakcoin.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Pakcoin Core (testnet, 64-bit).lnk"
     Delete /REBOOTOK "$SMSTARTUP\Pakcoin.lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
@@ -152,6 +158,15 @@ SectionEnd
 # Installer functions
 Function .onInit
     InitPluginsDir
+!if "64" == "64"
+    ${If} ${RunningX64}
+      ; disable registry redirection (enable access to 64-bit portion of registry)
+      SetRegView 64
+    ${Else}
+      MessageBox MB_OK|MB_ICONSTOP "Cannot install 64-bit version on a 32-bit system."
+      Abort
+    ${EndIf}
+!endif
 FunctionEnd
 
 # Uninstaller functions

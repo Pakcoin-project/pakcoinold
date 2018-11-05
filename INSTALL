@@ -1,9 +1,0 @@
-Building Pakcoin
-
-See doc/readme-qt.rst for instructions on building Pakcoin-Qt,
-the intended-for-end-users, nice-graphical-interface, reference
-implementation of Pakcoin.
-
-See doc/build-*.txt for instructions on building pakcoind,
-the intended-for-services, no-graphical-interface, reference
-implementation of Pakcoin.
