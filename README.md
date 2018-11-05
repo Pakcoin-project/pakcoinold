@@ -3,7 +3,7 @@ Pakcoin Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/pakcoin-project/pakcoin.svg?branch=master)](https://travis-ci.org/pakcoin-project/pakcoin)
 
-https://pakcoin.io
+https://pakcoin.org
 
 What is Pakcoin?
 ----------------
@@ -15,7 +15,7 @@ out collectively by the network. Pakcoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Pakcoin Core software, see [https://pakcoin.io](https://pakcoin.io).
+the Pakcoin Core software, see [https://pakcoin.org](https://pakcoin.org).
 
 License
 -------
@@ -32,6 +32,11 @@ regularly to indicate new official, stable release versions of Pakcoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+The developer [mailing list](https://groups.google.com/forum/#!forum/pakcoin-dev)
+should be used to discuss complicated or controversial changes before working
+on a patch set.
+
+Developer IRC can be found on Freenode at #pakcoin-dev.
 
 Testing
 -------
