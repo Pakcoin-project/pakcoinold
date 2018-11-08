@@ -10,11 +10,11 @@ SetCompressor /SOLID lzma
 !define URL https://pakcoin.org/
 
 # MUI Symbol Definitions
-!define MUI_ICON "/home/onemanteam/litecoin/share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "/home/onemanteam/litecoin/share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "/home/onemanteam/pakcoin0.15/share/pixmaps/bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "/home/onemanteam/pakcoin0.15/share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "/home/onemanteam/litecoin/share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "/home/onemanteam/pakcoin0.15/share/pixmaps/nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
@@ -22,7 +22,7 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Pakcoin Core"
 !define MUI_FINISHPAGE_RUN $INSTDIR\pakcoin-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/home/onemanteam/litecoin/share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/home/onemanteam/pakcoin0.15/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -48,7 +48,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile /home/onemanteam/litecoin/pakcoin-${VERSION}-win64-setup.exe
+OutFile /home/onemanteam/pakcoin0.15/pakcoin-${VERSION}-win64-setup.exe
 !if "64" == "64"
 InstallDir $PROGRAMFILES64\Pakcoin
 !else
@@ -73,14 +73,14 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File /home/onemanteam/litecoin/release/pakcoin-qt.exe
-    File /oname=COPYING.txt /home/onemanteam/litecoin/COPYING
-    File /oname=readme.txt /home/onemanteam/litecoin/doc/README_windows.txt
+    File /home/onemanteam/pakcoin0.15/release/pakcoin-qt.exe
+    File /oname=COPYING.txt /home/onemanteam/pakcoin0.15/COPYING
+    File /oname=readme.txt /home/onemanteam/pakcoin0.15/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File /home/onemanteam/litecoin/release/pakcoind.exe
-    File /home/onemanteam/litecoin/release/pakcoin-cli.exe
+    File /home/onemanteam/pakcoin0.15/release/pakcoind.exe
+    File /home/onemanteam/pakcoin0.15/release/pakcoin-cli.exe
     SetOutPath $INSTDIR\doc
-    File /r /home/onemanteam/litecoin/doc\*.*
+    File /r /home/onemanteam/pakcoin0.15/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 SectionEnd
